@@ -1,0 +1,25 @@
+allowed_sandbox_modes = ["read-only", "workspace-write"]
+allowed_approval_policies = ["untrusted", "on-request"]
+
+[permissions.filesystem]
+deny_read = [
+  "**/.env",
+  "**/.env.*",
+  "**/*.pem",
+  "**/*.key",
+  "**/*.p12",
+  "**/*.pfx",
+  "**/.aws/**",
+  "**/.config/gcloud/**",
+  "**/.config/gh/hosts.yml",
+  "**/secrets/**",
+]
+
+[rules]
+
+[[rules.prefix_rules]]
+decision = "prompt"
+justification = "Shell execution that can source environment files should require explicit approval."
+pattern = [
+  { any_of = ["bash", "sh", "zsh"] },
+]

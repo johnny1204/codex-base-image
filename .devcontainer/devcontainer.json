@@ -1,0 +1,26 @@
+{
+  "name": "codex-base-image",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "runArgs": [
+    "--cap-add=SYS_ADMIN",
+    "--cap-add=SYS_CHROOT",
+    "--cap-add=SETUID",
+    "--cap-add=SETGID",
+    "--security-opt=seccomp=unconfined",
+    "--security-opt=apparmor=unconfined"
+  ],
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "openai.chatgpt"
+      ]
+    }
+  }
+}
